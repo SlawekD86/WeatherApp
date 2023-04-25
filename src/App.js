@@ -4,7 +4,7 @@ import Container from './components/Container/Container';
 import React from 'react';
 
 const App = () => {
-console.log(process.env.REACT_APP_API_KEY)
+
   return (
     <Container>
       <Header />
