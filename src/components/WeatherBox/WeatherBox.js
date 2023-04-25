@@ -1,20 +1,24 @@
 import React, { useCallback, useState } from 'react';
+
 import PickCity from '../PickCity/PickCity';
 import WeatherSummary from '../WeatherSummary/WeatherSummary';
 import Loader from '../Loader/Loader';
 import ErrorBox from '../ErrorBox/ErrorBox';
 
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 const WeatherBox = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
 
   const handleCityChange = useCallback(async (city) => {
+    const WEATHER_API_URL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
     setIsLoading(true);
     setWeatherData(null);
     setError(null);
     try {
-      const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0419fc997411a8778b33ff6570541877&units=metric`);
+      const response = await fetch(WEATHER_API_URL);
       if (!response.ok) {
         throw new Error('Request failed');
       }
